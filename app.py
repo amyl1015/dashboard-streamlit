@@ -1,16 +1,20 @@
+import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
 import numpy as np
-import urllib.request import urlopen
+from urllib.request import urlopen
 import json
 
+st.header('This is a dashboard attempt')
+st.text('The first data set is a table showing SARS-CoV-2 sequencing data.')
 url = "https://lapis.cov-spectrum.org/open/v1/sample/aa-mutations"
-# store the repsonse of url
-repsonse = urlopen(url)
+# store the response of URL
+response = urlopen(url)
 
 # storing the JSON response
 # from url in data
-data_jason = json.loads(response.read())
+data_json = json.loads(response.read())
+
 
 # print the json response
 print(data_json['data'])
@@ -18,19 +22,20 @@ df = pd.DataFrame.from_dict(data_json['data'])
 st.dataframe(df)
 
 
-st.bar_chart(df)
-st.line_chart(df)
+#st.bar_chart(df)
+#st.line_chart(df)
 
-# df 2
 url = "https://mpox-lapis.genspectrum.org/v1/sample/nuc-mutations"
-# store the repsonse of url
-repsonse = urlopen(url)
 
-# storing the JSON response
-# from url in data
-data_jason = json.loads(response.read())
+#------------------------
+# Second Data set
+# -------------------
+st.text('The second data set is a table of results from the telehealth survey.')
+telehealth = pd.read_csv("telehealth.csv")
+pd.set_option('display.max_columns', None)
+telehealth
 
-# print the json response
-print(data_json['data'])
-df_mp = pd.DataFrame.from_dict(data_json['data'])
-st.dataframe(df_mp)
+#df = pd.DataFrame({'used telehealth':['yes', 'no', 'NaN'], 'val':[14, 4, 4]})
+#ax = df.plot.bar(x='used telehealth', y='val', rot=0)
+#st.dataframe(df)
+#st.bar_chart(data=df, x='a', y='b')
