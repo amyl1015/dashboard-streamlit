@@ -35,7 +35,13 @@ telehealth = pd.read_csv("telehealth.csv")
 pd.set_option('display.max_columns', None)
 telehealth
 
-#df = pd.DataFrame({'used telehealth':['yes', 'no', 'NaN'], 'val':[14, 4, 4]})
-#ax = df.plot.bar(x='used telehealth', y='val', rot=0)
-#st.dataframe(df)
-#st.bar_chart(data=df, x='a', y='b')
+st.subheader('Display of participants who knows telehealth')
+bar_chart = telehealth['know_telehealth_str'].value_counts()
+st.bar_chart(bar_chart)
+st.caption('Telehealth awareness"')
+
+
+st.subheader('Display of participants age who took telehealth survey')
+bar_chart = telehealth['age'].value_counts()
+st.line_chart(bar_chart)
+st.caption('participant age"')
